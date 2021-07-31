@@ -11,7 +11,7 @@ afterEach(async () => {
   await page.close();
 });
 
-describe.skip("In header", async () => {
+describe("In header", async () => {
   test("logo appears", async () => {
     const text = await page.getContentsOf("a.brand-logo");
 
