@@ -1,3 +1,4 @@
+const path = require("path");
 const Page = require("./helpers/page");
 
 let page;
@@ -48,11 +49,16 @@ describe("When logged in", async () => {
     });
 
     test("submitting and adding blog image", async () => {
-      const [fileChooser] = await Promise.all([
+      const [fileChooser, b] = await Promise.all([
         page.waitForFileChooser(),
         page.click("input[type=file]"),
       ]);
-      await fileChooser.accept(["C:/Users/lof/Pictures/asdas.png"]);
+      console.log({ fileChooser, b });
+      const imgPath = path.join(
+        path.resolve("client", "public"),
+        "test_img.png"
+      );
+      await fileChooser.accept([imgPath]);
 
       await page.click("button.green");
       await page.waitFor(".card");
