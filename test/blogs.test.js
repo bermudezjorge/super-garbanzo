@@ -8,7 +8,7 @@ beforeEach(async () => {
 });
 
 afterEach(async () => {
-  await page.close();
+  // await page.close();
 });
 
 describe("When logged in", async () => {
@@ -43,6 +43,28 @@ describe("When logged in", async () => {
       const title = await page.getContentsOf(".card-title");
       const content = await page.getContentsOf("p");
 
+      expect(title).toEqual("my title");
+      expect(content).toEqual("my content");
+    });
+
+    test("submitting and adding blog image", async () => {
+      const [fileChooser] = await Promise.all([
+        page.waitForFileChooser(),
+        page.click("input[type=file]"),
+      ]);
+      await fileChooser.accept(["C:/Users/lof/Pictures/asdas.png"]);
+
+      await page.click("button.green");
+      await page.waitFor(".card");
+
+      await page.click(".card a");
+      await page.waitFor("h3");
+
+      const alt = await page.$eval("img", (elem) => elem.alt);
+      const title = await page.getContentsOf("h3");
+      const content = await page.getContentsOf("p");
+
+      expect(alt).toEqual("blog post related");
       expect(title).toEqual("my title");
       expect(content).toEqual("my content");
     });

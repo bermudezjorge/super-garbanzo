@@ -19,6 +19,7 @@ describe("In header", async () => {
   });
 
   test("clicking login button starts oAuth flow", async () => {
+    await page.waitFor("li a");
     await page.click("li a");
 
     const url = await page.url();

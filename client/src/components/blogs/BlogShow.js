@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { fetchBlog } from '../../actions';
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import { fetchBlog } from "../../actions";
 
 class BlogShow extends Component {
   componentDidMount() {
@@ -9,13 +9,17 @@ class BlogShow extends Component {
 
   render() {
     if (!this.props.blog) {
-      return '';
+      return "";
     }
 
-    const { title, content } = this.props.blog;
+    const { title, content, image } = this.props.blog;
+    console.log(this.props.blog);
 
     return (
       <div>
+        {image && (
+          <img src={image} alt="blog post related" style={{ width: "300px" }} />
+        )}
         <h3>{title}</h3>
         <p>{content}</p>
       </div>
