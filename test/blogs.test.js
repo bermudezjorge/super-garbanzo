@@ -49,11 +49,10 @@ describe("When logged in", async () => {
     });
 
     test("submitting and adding blog image", async () => {
-      const [fileChooser, b] = await Promise.all([
+      const [fileChooser] = await Promise.all([
         page.waitForFileChooser(),
         page.click("input[type=file]"),
       ]);
-      console.log({ fileChooser, b });
       const imgPath = path.join(
         path.resolve("client", "public"),
         "test_img.png"
